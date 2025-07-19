@@ -1,6 +1,5 @@
 package com.notedocs.user.entity;
 
-import com.notedocs.user.enums.UserRole.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
