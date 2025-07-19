@@ -40,6 +40,9 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new HashSet<>();
        roles.forEach(role -> {
+
+           authorities.add(new SimpleGrantedAuthority("ROLE_"+role.getRole()));
+
            role.getAuthorities().forEach(authority ->
                                 {authorities.add(new SimpleGrantedAuthority(authority.getAuthority()));});
        });
