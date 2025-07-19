@@ -1,5 +1,6 @@
 package com.notedocs.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class Authority {
     private String authority;
 
     @ManyToMany(mappedBy = "authorities")
+    @JsonIgnore
     private Set<Role> roles;
 
 }
