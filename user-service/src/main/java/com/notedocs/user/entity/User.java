@@ -7,9 +7,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+
 @Setter
 @Getter
 @Builder
@@ -28,29 +27,34 @@ public class User implements UserDetails {
     private String email;
     private String phone;
     private boolean enabled;
-    private UserRole role;
 
-
-
-
-
-
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        Set<GrantedAuthority> authorities = new HashSet<>();
+       roles.forEach(role -> {
+           role.getAuthorities().forEach(authority ->
+                                {authorities.add(new SimpleGrantedAuthority(authority.getAuthority()));});
+       });
+        return authorities;
     }
 
 
     @Override
     public boolean isAccountNonExpired() {
-        return enabled;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return enabled;
+        return true;
     }
 
     @Override
