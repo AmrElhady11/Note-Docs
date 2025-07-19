@@ -1,5 +1,6 @@
 package com.notedocs.user.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,13 +28,22 @@ public class User implements UserDetails {
     private String phone;
     private boolean enabled;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles;
+
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private Set<Token> tokens;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private Set<OTP> OTPs;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
