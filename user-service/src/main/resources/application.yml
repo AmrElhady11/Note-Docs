@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: user-service
+
+
+
+
+
+
+JWT_EXPIRATION : 1233444
