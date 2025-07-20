@@ -1,16 +1,15 @@
 package com.notedocs.user.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.notedocs.user.enums.UserRole;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Set;
 
 @Setter
 @Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -19,9 +18,10 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(mappedBy = "roles",cascade = CascadeType.PERSIST)
     @JsonIgnore
     private Set<User> users;
 
