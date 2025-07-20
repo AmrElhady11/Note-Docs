@@ -23,8 +23,7 @@ private final AuthService authService;
     }
     @PostMapping("/LogIn")
     public ResponseEntity<LoginResponse> Login(@RequestBody LoginRequest request){
-
-
+        return new ResponseEntity<>(authService.authenticate(request), HttpStatus.OK);
     }
 
 
