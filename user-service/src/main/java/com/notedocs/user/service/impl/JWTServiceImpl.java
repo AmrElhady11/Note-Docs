@@ -1,5 +1,4 @@
 package com.notedocs.user.service.impl;
-
 import com.notedocs.user.repository.TokenRepository;
 import com.notedocs.user.repository.UserRepository;
 import com.notedocs.user.service.JWTService;
@@ -11,7 +10,6 @@ import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
