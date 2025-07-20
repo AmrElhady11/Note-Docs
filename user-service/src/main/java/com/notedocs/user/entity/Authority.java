@@ -21,7 +21,7 @@ public class Authority {
     private Integer id;
     private String authority;
 
-    @ManyToMany(mappedBy = "authorities")
+    @ManyToMany(mappedBy = "authorities",cascade = CascadeType.PERSIST)
     @JsonIgnore
     private Set<Role> roles;
 
