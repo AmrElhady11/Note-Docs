@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "otp")
@@ -24,7 +25,7 @@ public class OTP {
     private String otp;
 
     @Column(name = "expiration_time", nullable = false)
-    private LocalDateTime expirationTime;
+    private Date expirationTime;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
